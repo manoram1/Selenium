@@ -1,0 +1,54 @@
+package Project;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class Speedtest {
+	static WebDriver driver;
+	public static void main(String[] args) throws IOException {
+		System.setProperty("webdriver.chrome.driver", "D:\\Selenium\\chromedriver\\chromedriver.exe");
+		driver=new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
+		driver.get("http://speedtest.net");
+		driver.findElement(By.xpath("//span[@class='start-text']")).click();
+		WebDriverWait wait=new WebDriverWait(driver,120);
+		//WebElement share;
+		WebElement s1;
+		WebElement s2;
+		WebElement s3;
+		
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//a[@class='social-icon'])[1]")));
+
+		s1=driver.findElement(By.xpath("//span[@class='result-data-large number result-data-value download-speed']"));
+		//System.out.println(s1.getText());
+		s2=driver.findElement(By.xpath("//span[@class='result-data-large number result-data-value ping-speed']"));
+		
+		s3=driver.findElement(By.xpath("//span[@class='result-data-large number result-data-value upload-speed']"));
+		System.out.println("Ping Time :"+s2.getText()+"ms");
+		System.out.println("Download Speed :"+s1.getText()+"Mbps");
+		System.out.println("Upload Speed :"+s3.getText()+"Mbps");
+	//	screenshot("working");//enter screenshot img name
+		
+		
+		
+		driver.close();
+	}
+}
