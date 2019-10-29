@@ -51,4 +51,8 @@ public class Speedtest {
 		
 		driver.close();
 	}
+	public static void screenshot(String fileName) throws IOException {
+		File file=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(file,new File( "D:\\Selenium\\sample\\"+fileName+".jpg"));
+	}
 }
